@@ -5,28 +5,28 @@ class Create extends Component {
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChangeMovieName = this.onChangeMovieName.bind(this);
-        this.onChangeMovieYear = this.onChangeMovieYear.bind(this);
-        this.onChangeMoviePoster = this.onChangeMoviePoster.bind(this);
+        this.onChangeAlbumName = this.onChangeAlbumName.bind(this);
+        this.onChangeAlbumYear = this.onChangeAlbumYear.bind(this);
+        this.onChangeAlbumPoster = this.onChangeAlbumPoster.bind(this);
         this.state = {
-            Title: '',
+            Album: '',
             Year: '',
             Poster: ''
         }
     }
 
     handleSubmit(event) {
-        console.log("Name: " +this.state.Title+
+        console.log("Name: " +this.state.Album+
         " Year: " + this.state.Year +
         "Poster: " + this.state.Poster);
 
-        const NewMovie = {
-            Title: this.state.Title,
+        const NewMusic = {
+            Album: this.state.Album,
             Year: this.state.Year,
             Poster: this.state.Poster
         }
 
-        axios.post('http://localhost:4000/api/movies', NewMovie)
+        axios.post('http://localhost:4000/api/music', NewMusic)
         .then((response)=>{
             console.log(response)
         })
@@ -36,22 +36,22 @@ class Create extends Component {
 
         event.preventDefault();
         this.setState({
-            Title:'',
+            Album:'',
             Year:'',
             Poster:''
         });
     }
-    onChangeMovieName(event) {
+    onChangeAlbumName(event) {
         this.setState({
-            Title: event.target.value
+            Album: event.target.value
         })
     }
-    onChangeMovieYear(event) {
+    onChangeAlbumYear(event) {
         this.setState({
             Year: event.target.value
         })
     }
-    onChangeMoviePoster(event){
+    onChangeAlbumPoster(event){
         this.setState({
             Poster: event.target.value
         })
@@ -64,31 +64,31 @@ class Create extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group">
-                        <label>Add Movie Name: </label>
+                        <label>Add Album Name: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.Title}
-                            onChange={this.onChangeMovieName}
+                            value={this.state.Album}
+                            onChange={this.onChangeAlbumName}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Add Movie Year: </label>
+                        <label>Add Album Year: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.Year}
-                            onChange={this.onChangeMovieYear}
+                            onChange={this.onChangeAlbumYear}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Add Movie Poster: </label>
+                        <label>Add Album Poster: </label>
                         <textarea type="text"
                             className="form-control"
                             value={this.state.Poster}
-                            onChange={this.onChangeMoviePoster}
+                            onChange={this.onChangeAlbumPoster}
                         />
                     </div>
                     <div>
-                        <input type="submit" value="Add Movie"
+                        <input type="submit" value="Add Album"
                             className="btn btn-primary"></input>
                     </div>
                 </form>

@@ -29,45 +29,45 @@ async function main() {
   await mongoose.connect(strConnection);
 }
 
-const movieSchema = new mongoose.Schema({
-    Title:String,
+const musicSchema = new mongoose.Schema({
+    Album:String,
     Year:String,
     Poster:String
 });
 
-const movieModel = mongoose.model('martindfgdfgdfg', movieSchema);
+const musicModel = mongoose.model('martindfgdfgdfg', musicSchema);
 
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.post('/api/movies', (req,res)=>{
+app.post('/api/music', (req,res)=>{
     console.log(req.body);
-    console.log(req.body.Title);
+    console.log(req.body.Album);
     console.log(req.body.Year);
     console.log(req.body.Poster);
 
-    movieModel.create({
-        Title:req.body.Title,
+    musicModel.create({
+        album:req.body.Album,
         Year:req.body.Year,
         Poster:req.body.Poster
     });
     res.send('Data Sent to Server!')
 })
 
-app.get('/api/movies/:id',(req, res)=>{
+app.get('/api/music/:id',(req, res)=>{
     console.log(req.params.id);
 
-    movieModel.findById(req.params.id,(error,data)=>{
+    musicModel.findById(req.params.id,(error,data)=>{
         res.json(data);
     })
 })
 
-app.delete('/api/movies/:id', (req, res)=>{
+app.delete('/api/music/:id', (req, res)=>{
     console.log('Deleteing : '+req.params.id);
 
-    movieModel.deleteOne({_id:req.params.id},
+    musicModel.deleteOne({_id:req.params.id},
         (error, data)=>{
             if(error)
                 res.send(error)
@@ -75,12 +75,12 @@ app.delete('/api/movies/:id', (req, res)=>{
         })
 })
 
-app.put('/api/movies/:id',(req, res)=>{
+app.put('/api/music/:id',(req, res)=>{
     console.log('update');
     console.log(req.body);
     console.log("Updating: " + req.params.id);
 
-    movieModel.findByIdAndUpdate(req.params.id, req.body, {new:true},
+    musicModel.findByIdAndUpdate(req.params.id, req.body, {new:true},
         (err,data)=>{
             res.send(data);
         })
@@ -89,8 +89,8 @@ app.put('/api/movies/:id',(req, res)=>{
 
 
 
-app.get('/api/movies', (req, res) => {
-    movieModel.find((err, data)=>{
+app.get('/api/music', (req, res) => {
+    musicModel.find((err, data)=>{
         res.json(data);
     })
           

@@ -17,18 +17,22 @@ import Read from './components/read';
 import Create from './components/create';
 import Edit from './components/edit';
 
+
 class App extends Component {
   render() {
     return (
       <Router>
       <div className="App">
+
+
         <Navbar bg="primary" variant="dark">
+          
           <Container>
             <Navbar.Brand href="/">Navbar</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/read">Read</Nav.Link>
-              <Nav.Link href="/create">Create</Nav.Link>
+              <Nav.Link href="/read">Albums</Nav.Link>
+              <Nav.Link href="/create">Add Album</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

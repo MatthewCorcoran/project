@@ -6,21 +6,21 @@ class Edit extends Component {
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChangeMovieName = this.onChangeMovieName.bind(this);
-        this.onChangeMovieYear = this.onChangeMovieYear.bind(this);
-        this.onChangeMoviePoster = this.onChangeMoviePoster.bind(this);
+        this.onChangeAlbumName = this.onChangeAlbumName.bind(this);
+        this.onChangeAlbumYear = this.onChangeAlbumYear.bind(this);
+        this.onChangeAlbumPoster = this.onChangeAlbumPoster.bind(this);
         this.state = {
-            Title: '',
+            Album: '',
             Year: '',
             Poster: ''
         }
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/api/movies/'+ this.props.match.params.id)
+        axios.get('http://localhost:4000/api/music/'+ this.props.match.params.id)
         .then((response)=>{
             this.setState({
-                Title:response.data.Title,
+                Album:response.data.Album,
                 Year:response.data.Year,
                 Poster:response.data.Poster,
                 _id:response.data._id
@@ -30,39 +30,39 @@ class Edit extends Component {
     }
 
     handleSubmit(event) {
-        console.log("Name: " +this.state.Title+
+        console.log("Name: " +this.state.Album+
         " Year: " + this.state.Year +
         "Poster: " + this.state.Poster);
 
-        const NewMovie = {
-            Title: this.state.Title,
+        const NewAlbum = {
+            Album: this.state.Album,
             Year: this.state.Year,
             Poster: this.state.Poster
         }
 
-        axios.put('http://localhost:4000/api/movies/' + this.state._id, NewMovie)
+        axios.put('http://localhost:4000/api/music/' + this.state._id, NewAlbum)
         .then((response)=>{console.log(response)})
         .catch();
         
 
         event.preventDefault();
         this.setState({
-            Title:'',
+            Album:'',
             Year:'',
             Poster:''
         });
     }
-    onChangeMovieName(event) {
+    onChangeAlbumName(event) {
         this.setState({
-            Title: event.target.value
+            Album: event.target.value
         })
     }
-    onChangeMovieYear(event) {
+    onChangeAlbumYear(event) {
         this.setState({
             Year: event.target.value
         })
     }
-    onChangeMoviePoster(event){
+    onChangeAlbumPoster(event){
         this.setState({
             Poster: event.target.value
         })
@@ -71,35 +71,35 @@ class Edit extends Component {
     render() {
         return (
             <div>
-                <h1>This is my Edit Component!</h1>
+                <h1></h1>
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group">
-                        <label>Edit Movie Name: </label>
+                        <label>Edit Album Name: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.Title}
-                            onChange={this.onChangeMovieName}
+                            value={this.state.Album}
+                            onChange={this.onChangeAlbumName}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Movie Year: </label>
+                        <label>Edit Album Year: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.Year}
-                            onChange={this.onChangeMovieYear}
+                            onChange={this.onChangeAlbumYear}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Movie Poster: </label>
+                        <label>Edit Album Poster: </label>
                         <textarea type="text"
                             className="form-control"
                             value={this.state.Poster}
-                            onChange={this.onChangeMoviePoster}
+                            onChange={this.onChangeAlbumPoster}
                         />
                     </div>
                     <div>
-                        <input type="submit" value="Edit Movie"
+                        <input type="submit" value="Edit Album"
                             className="btn btn-primary"></input>
                     </div>
                 </form>
